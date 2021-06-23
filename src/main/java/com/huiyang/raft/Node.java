@@ -86,7 +86,7 @@ public class Node {
                             try {
                                 String message = "连接成功,这里是节点,你是第" + (selector.keys().size() - 1) + "个用户";
                                 //向客户端发送消息
-                                clientChannel.write(ByteBuffer.wrap(message.getBytes()));
+//                                clientChannel.write(ByteBuffer.wrap(message.getBytes()));
                                 InetSocketAddress address = (InetSocketAddress) clientChannel.getRemoteAddress();
                                 //输出客户端地址
                                 System.out.println(Calendar.getInstance().getTime() + "\t" + address.getHostString() +

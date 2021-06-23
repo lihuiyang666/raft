@@ -17,9 +17,7 @@ public class PoolController {
     public boolean addTrans(@RequestBody RTransaction trans){
         System.out.println("接收到交易");
         boolean res= raftPool.addToPool(trans);
-        for (RTransaction transaction:raftPool.pool){
-            System.out.println(transaction);
-        }
+
         return res;
 
     }

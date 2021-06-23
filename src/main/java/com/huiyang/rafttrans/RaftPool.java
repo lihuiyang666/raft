@@ -56,7 +56,7 @@ public class RaftPool implements TransactionPool {
 
     @Override
     public void check() {
-        if (pool.size()>1){
+        if (pool.size()>0){
             boolean res=sendToProtocol();
             System.out.println(res);
         }

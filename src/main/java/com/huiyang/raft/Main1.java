@@ -21,8 +21,8 @@ public class Main1 {
         account.host=a.port;
         System.out.println(account);
         restTemplate.postForObject("http://127.0.0.1:8080/raft/accounts",account,boolean.class);
-        RTransaction t1 =new RTransaction(a.address,a.privateKey,"这是第一个事务");
-        restTemplate.postForObject("http://127.0.0.1:8080/raft/transactions",t1 ,boolean.class);
+//        RTransaction t1 =new RTransaction(a.address,a.privateKey,"这是第一个事务");
+//        restTemplate.postForObject("http://127.0.0.1:8080/raft/transactions",t1 ,boolean.class);
 
 
     }

@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.ArrayList;
 import java.util.HashSet;
 
@@ -45,6 +46,11 @@ public class NetController {
     @RequestMapping(value = "/accounts/leader",method = RequestMethod.GET)
     public RAccount getleader(){
         return raftNet.leader;
+    }
+
+    @RequestMapping(value = "test",method = RequestMethod.GET)
+    public String test(HttpServletRequest req){
+        return req.getRemoteHost()+" "+req.getRemotePort();
     }
 
 
