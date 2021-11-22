@@ -158,7 +158,7 @@ public class RaftProtocol implements Protocol {
                     final ArrayList<RTransaction> a= (ArrayList<RTransaction>) JSONUtils.toObjectList(re,RTransaction.class);
                     if (a!=null){
 //                            BufferedReader buf=new BufferedReader(new InputStreamReader(System.in));
-                        System.out.println(Calendar.getInstance().getTime()+" 收到事务，发送给flowers");
+                        System.out.println(Calendar.getInstance().getTime()+"receive transactions from consensus engine, send to followers");
                         RestTemplate restTemplate=new RestTemplate();
                         AtomicInteger count=new AtomicInteger(0);
                         HashSet<String> flowerlist=restTemplate.getForObject("http://127.0.0.1:8080/raft/accounts/followers",HashSet.class);
@@ -191,14 +191,14 @@ public class RaftProtocol implements Protocol {
                                             sendbuffer.flip();
                                             socketChannel.write(sendbuffer);
                                             if (!sendbuffer.hasRemaining()) {
-                                                System.out.println(Calendar.getInstance().getTime() + " 发送成功" + " 当前线程:" + Thread.currentThread().getName() + Thread.currentThread().getId());
+                                                System.out.println(Calendar.getInstance().getTime() + " send successfully:" + Thread.currentThread().getName() + Thread.currentThread().getId());
                                             }
                                             receivebuffer = ByteBuffer.allocate(256);
                                             int len2 = 0;
                                             byte[] res2 = new byte[128];
-                                            Thread.sleep(10);
+                                            Thread.sleep(100);
                                             if ((len2 = socketChannel.read(receivebuffer)) != 0) {
-                                                System.out.println("该flower有回应");
+                                                System.out.println("receive agreement from follower");
                                                 count.incrementAndGet();
 
 //                                                receivebuffer.flip();
@@ -213,7 +213,7 @@ public class RaftProtocol implements Protocol {
 //                                                }
                                             }
                                             socketChannel.close();
-                                            System.out.println("线程结束");
+//                                            System.out.println("线程结束");
 
 
 
@@ -224,10 +224,10 @@ public class RaftProtocol implements Protocol {
                                 }
                             }).start();
                         }
-                        Thread.sleep(100);
+                        Thread.sleep(110);
                         if (count.incrementAndGet()>flowerlist.size()/2){
 
-                            System.out.println("事务完成共识，开始同步");
+                            System.out.println("transactions have completed consensus , start replicating");
                             for (String t:flowerlist){
 
                                 String[] addr=t.split(":");
