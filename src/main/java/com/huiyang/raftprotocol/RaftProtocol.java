@@ -196,7 +196,7 @@ public class RaftProtocol implements Protocol {
                                             receivebuffer = ByteBuffer.allocate(256);
                                             int len2 = 0;
                                             byte[] res2 = new byte[128];
-                                            Thread.sleep(100);
+                                            Thread.sleep(50);
                                             if ((len2 = socketChannel.read(receivebuffer)) != 0) {
                                                 System.out.println("receive agreement from follower");
                                                 count.incrementAndGet();
@@ -224,7 +224,7 @@ public class RaftProtocol implements Protocol {
                                 }
                             }).start();
                         }
-                        Thread.sleep(110);
+                        Thread.sleep(60);
                         if (count.incrementAndGet()>flowerlist.size()/2){
 
                             System.out.println("transactions have completed consensus , start replicating");

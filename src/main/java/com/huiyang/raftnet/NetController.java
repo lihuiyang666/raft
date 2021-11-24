@@ -21,13 +21,11 @@ public class NetController {
     @RequestMapping(value ="/accounts",method = RequestMethod.POST)
     public boolean register(@RequestBody RAccount newAccount){
 
-        boolean res=raftNet.addMember(newAccount);
-
-        for (RAccount p:raftNet.accounts){
-            System.out.println(p);
-
-        }
-        return res;
+        //        for (RAccount p:raftNet.accounts){
+//            System.out.println(p);
+//
+//        }
+        return raftNet.addMember(newAccount);
     }
 
     @RequestMapping(value ="/accounts",method = RequestMethod.GET)
